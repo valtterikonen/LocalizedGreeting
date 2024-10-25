@@ -12,7 +12,7 @@ COPY src ./src
 RUN mvn clean package -DskipTests -X
 
 # Stage 2: Create a smaller runtime image
-FROM openjdk:17-jre-slim
+FROM openjdk:17
 
 # Set the working directory
 WORKDIR /app
@@ -22,3 +22,4 @@ COPY --from=build /app/target/*.jar app.jar
 
 # Command to run the application
 ENTRYPOINT ["java", "-jar", "app.jar"]
+
